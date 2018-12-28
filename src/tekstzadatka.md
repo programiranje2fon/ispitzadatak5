@@ -4,8 +4,8 @@ Napraviti javnu klasu **TwitterPoruka** u paketu **com.twitter.poruke** koja ima
 * Privatni atribut **poruka** koji predstavlja tekst poruke.
 * Privatni atribut **vreme** koji predstavlja datum i vreme objavljivanja poruke (klasa GregorianCalendar)
 * Odgovarajuće javne get i set metode za ove atribute. Nedozvoljene vrednosti za atribut korisnik su
-NULL i prazan String, a poruka ne sme biti NULL i može imati najviše 140 znakova. Vreme mora da
-bude neki datum u prošlosti i ne sme da bude NULL. U slučaju unosa ovih nedozvoljenih vrednosti
+NULL i prazan String, a poruka ne sme biti NULL i može imati najviše 140 znakova. Vreme ne sme da
+bude neki datum u pudućnosti i ne sme da bude NULL. U slučaju unosa ovih nedozvoljenih vrednosti
 potrebno je baciti izuzetak sa odgovarajućom porukom.
 * Redefinisanu metodu toString klase Object koja koja vraća jedan String u kome se nalaze svi podaci
 poruke u formatu **“KORISNIK_####_VREME_####_PORUKA_####”**.
@@ -22,7 +22,7 @@ Napraviti javnu klasu **Twitter** u paketu **com.twitter** koja implem. interfej
 * __Implementiranu metodu unesi__ koja novu poruku unosi na kraj liste. Pre unosa podesiti vreme
 objavljivanja poruke na trenutno vreme. Kad se izvrši unos, potrebno je na ekranu ispisati sve
 poruke iz liste.
-* Implementiranu metodu vratiPoruke koja kao ulazni parametar prima ceo broj koji predstavlja
+* Implementiranu metodu **vratiPoruke** koja kao ulazni parametar prima ceo broj koji predstavlja
 maksimalan broj poruka i String koji predstavlja tag. Metoda u tekstualni fajl “pretraga.txt” upisuje
 tekst svih poruka koje sadrže dati tag. __Tag se nalazi u tekstu poruke i počinje znakom # a završava se praznim mestom (tag u sebi ne sme da sadrži prazna mesta)__. Primer: ako je unet tag
 “programiranje” onda se u tekstu poruke traži “#programiranje_”. Maksimalan broj poruka koje treba

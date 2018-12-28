@@ -22,7 +22,9 @@ public class PokreniTestove {
 
 	public static void main(String[] args) {
 		runTestsForClass(TwitterPorukaTest.class);
+		
 		runTestsForClass(TwitterAPITest.class);
+		
 		runTestsForClass(TwitterTest.class);
 	}
 
