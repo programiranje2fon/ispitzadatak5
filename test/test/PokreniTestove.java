@@ -10,6 +10,10 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import zadatak.com.twitter.TwitterTest;
+import zadatak.com.twitter.api.TwitterAPITest;
+import zadatak.com.twitter.poruke.TwitterPorukaTest;
+
 /**
  * This class executes all tests and prints out the report.
  * 
@@ -17,8 +21,9 @@ import org.junit.runner.notification.Failure;
 public class PokreniTestove {
 
 	public static void main(String[] args) {
-		//runTestsForClass(BebaTest.class);
-	
+		runTestsForClass(TwitterPorukaTest.class);
+		runTestsForClass(TwitterAPITest.class);
+		runTestsForClass(TwitterTest.class);
 	}
 
 	/**

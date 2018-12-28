@@ -8,7 +8,7 @@ NULL i prazan String, a poruka ne sme biti NULL i može imati najviše 140 znako
 bude neki datum u prošlosti i ne sme da bude NULL. U slučaju unosa ovih nedozvoljenih vrednosti
 potrebno je baciti izuzetak sa odgovarajućom porukom.
 * Redefinisanu metodu toString klase Object koja koja vraća jedan String u kome se nalaze svi podaci
-poruke u formatu “KORISNIK_####_VREME_####_PORUKA_####”.
+poruke u formatu **“KORISNIK_####_VREME_####_PORUKA_####”**.
 
 Napraviti javni interfejs **TwitterAPI** u paketu **com.twitter.api** koji ima:
 * Javnu metodu vratiPoruke koja kao ulaz prima naziv korisnika i vraća listu objek. TwitterPoruka.
