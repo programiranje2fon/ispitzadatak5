@@ -91,7 +91,7 @@ public class TwitterPorukaTest {
 		String actual = (String) TestUtil.getFieldValue(instance, "poruka");
 		assertTrue(
 				"Za prosledjeni argument " + poruka
-						+ ", nakon izvrsetka metode setPoruka vrednost abributa korisnik je " + actual,
+						+ ", nakon izvrsetka metode setPoruka vrednost abributa poruka je " + actual,
 				poruka.equals(actual));
 	}
 
