@@ -1,4 +1,4 @@
-package zadatak.ispravka_koda;
+package ispravka_koda;
 
 import static org.junit.Assert.assertTrue;
 
@@ -38,7 +38,7 @@ public class IspisivacStreliceTest {
 			else
 				s = s.concat(" ");
 			if(j % 5 == 0)
-				s = s.concat("\n");
+				s = s.concat("\r\n");
 			j++;
 		}
 		return s;
