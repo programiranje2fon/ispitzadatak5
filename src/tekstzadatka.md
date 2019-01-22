@@ -11,7 +11,7 @@ potrebno je baciti izuzetak sa odgovarajućom porukom.
 poruke u formatu **“KORISNIK_####_VREME_####_PORUKA_####”**.
 
 Napraviti javni interfejs **TwitterAPI** u paketu **com.twitter.api** koji ima:
-* Javnu metodu vratiPoruke koja kao ulaz prima naziv korisnika i vraća listu objek. TwitterPoruka.
+* Javnu metodu vratiPoruke koja kao ulaz prima naziv korisnika i vraća listu objekata TwitterPoruka.
 * Javnu metodu vratiPoruke koja kao ulazni parametar prima ceo broj koji predstavlja maksimalan broj
 poruka i String koji predstavlja tag, a ne vraća ništa.
 * Javnu metodu unesi koja kao ulaz dobija naziv korisnika i tekst poruke, a ne vraća ništa.

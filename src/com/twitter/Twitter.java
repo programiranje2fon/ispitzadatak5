@@ -45,13 +45,14 @@ public class Twitter implements TwitterAPI {
 			//Ako se nadje neka takva, i ako nije prekoracen maxBroj
 			//ona se upisuje u fajl. Ako je prekoracen maxBroj,pretraga
 			//se prekida.
-			for (int i = 0; i < poruke.size(); i++) 
+			for (int i = 0; i < poruke.size(); i++) {
 				if (poruke.get(i).getPoruka().indexOf(tag)!=-1)
 					if (brojac < maxBroj){
 						out.println(poruke.get(i));
 						brojac++;
 					}
 					else break;
+			}
 			
 			out.close();
 		}catch(Exception e){
