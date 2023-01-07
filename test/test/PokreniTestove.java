@@ -10,6 +10,7 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import ispravka_koda.IspisivacStreliceTest;
 import zadatak.com.twitter.TwitterTest;
 import zadatak.com.twitter.api.TwitterAPITest;
 import zadatak.com.twitter.poruke.TwitterPorukaTest;
@@ -26,6 +27,8 @@ public class PokreniTestove {
 		runTestsForClass(TwitterAPITest.class);
 		
 		runTestsForClass(TwitterTest.class);
+		
+		runTestsForClass(IspisivacStreliceTest.class);
 	}
 
 	/**
