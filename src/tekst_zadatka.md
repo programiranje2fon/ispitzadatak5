@@ -31,7 +31,7 @@ upisati u fajl je dat kao ulazni parametar - ako ih ima više od toga, prekobroj
 * __Implementiranu metodu vratiPoruke__ koja kao ulazni parametar prima naziv korisnika i vraća listu
 objekata klase TwitterPoruka u kojoj se nalaze samo poruke koje je objavio taj korisnik i to u toku
 prethodnog meseca (u odnosu na trenutni datum). Poruke u listi treba da budu poređane tako da na
-početku budu najstarije poruke pa tek onda novije. __Obratiti pažnju na situaciju kada je trenutno januar mesec__.
+početku budu najstarije poruke pa tek onda novije.
 
 # Zadatak 2 - Ispravka koda
 
