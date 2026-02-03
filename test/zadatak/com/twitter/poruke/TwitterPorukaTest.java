@@ -3,8 +3,7 @@ package zadatak.com.twitter.poruke;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Modifier;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
 import org.junit.After;
 import org.junit.Before;
@@ -134,40 +133,38 @@ public class TwitterPorukaTest {
 	@Test
 	public void metoda_setVreme_vidljivost() {
 		assertTrue("Metoda setVreme nije javna", TestUtil.hasMethodModifier(TwitterPoruka.class, "setVreme",
-				new Class<?>[] { GregorianCalendar.class }, Modifier.PUBLIC));
+				new Class<?>[] { LocalDateTime.class }, Modifier.PUBLIC));
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void metoda_setVreme_null() {
-		GregorianCalendar vreme = null;
+		LocalDateTime vreme = null;
 		instance.setVreme(vreme);
 		assertTrue("Za prosledjeni argument null metoda vreme ne baca neproveravani izuzetak", false);
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void metoda_setVreme_buduci() {
-		GregorianCalendar vreme = new GregorianCalendar();
-		vreme.add(Calendar.DATE, 1);
+        LocalDateTime vreme = LocalDateTime.now().plusDays(1);
 		instance.setVreme(vreme);
-		assertTrue("Za prosledjeni argument " + vreme.getTime().toString()
+		assertTrue("Za prosledjeni argument " + vreme
 				+ " metoda vreme ne baca neproveravani izuzetak", false);
 	}
 
 	@Test
 	public void metoda_setVreme_prosli() {
-		GregorianCalendar vreme = new GregorianCalendar();
-		vreme.add(Calendar.DATE, -1);
+        LocalDateTime vreme = LocalDateTime.now().minusDays(1);
 		try {
 			instance.setVreme(vreme);
 		} catch (RuntimeException e) {
-			assertTrue("Za prosledjeni argument " + vreme.getTime().toString()
+			assertTrue("Za prosledjeni argument " + vreme
 					+ " metoda setVreme baca neproveravani izuzetak", false);
 		}
 
-		GregorianCalendar actual = (GregorianCalendar) TestUtil.getFieldValue(instance, "vreme");
+        LocalDateTime actual = (LocalDateTime) TestUtil.getFieldValue(instance, "vreme");
 		assertTrue(
-				"Za prosledjei argument argument " + vreme.getTime().toString()
-						+ ", nakon izvrsetka metode setVreme, vrednost atributa vreme je " + vreme.getTime().toString(),
+				"Za prosledjei argument argument " + vreme
+						+ ", nakon izvrsetka metode setVreme, vrednost atributa vreme je " + vreme,
 				actual.equals(vreme));
 
 	}
@@ -176,14 +173,14 @@ public class TwitterPorukaTest {
 	public void metoda_toString() {
 		String korisnik = "Marko";
 		String poruka = "zdravo";
-		GregorianCalendar vreme = new GregorianCalendar();
-		vreme.add(Calendar.DATE, -1);
+        LocalDateTime vreme = LocalDateTime.now().minusDays(1);
+
 		instance.setKorisnik(korisnik);
 		instance.setPoruka(poruka);
 		instance.setVreme(vreme);
 		korisnik = (String) TestUtil.getFieldValue(instance, "korisnik");
 		poruka = (String) TestUtil.getFieldValue(instance, "poruka");
-		vreme = (GregorianCalendar) TestUtil.getFieldValue(instance, "vreme");
+		vreme = (LocalDateTime) TestUtil.getFieldValue(instance, "vreme");
 		String result = instance.toString();
 		int indexKorisnik = result.indexOf("KORISNIK");
 		assertTrue("String koji vraca metoda toString ne sadrzi rec \"KORISNIK\"", indexKorisnik != -1);
@@ -202,11 +199,15 @@ public class TwitterPorukaTest {
 				"String koji vraca metoda toString nije u doborom formatu, vrednost atributa korisnik nije na ispravnom mestu",
 				indexKorisnikValue > indexKorisnik && indexKorisnikValue < indexVreme);
 
-		int indexYearValue = result.indexOf(""+vreme.get(GregorianCalendar.YEAR));
+		int indexYearValue = result.indexOf(""+vreme.getYear());
 		assertTrue("String koji vraca metoda toString ne sadrzi vrednost godine objavljivanja poruke",
 				indexYearValue != -1);
 
-		int indexDateValue = result.indexOf(""+vreme.get(GregorianCalendar.DATE));
+        int indexMonthValue = result.indexOf(""+vreme.getMonthValue());
+        assertTrue("String koji vraca metoda toString ne sadrzi vrednost meseca objavljivanja poruke",
+                indexMonthValue != -1);
+
+        int indexDateValue = result.indexOf(""+vreme.getDayOfMonth());
 		assertTrue("String koji vraca metoda toString ne sadrzi vrednost dana objavljivanja poruke",
 				indexDateValue != -1);
 

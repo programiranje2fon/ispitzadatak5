@@ -1,12 +1,13 @@
 package com.twitter.poruke;
 
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TwitterPoruka {
 
 	private String korisnik;
 	private String poruka;
-	private GregorianCalendar vreme;
+	private LocalDateTime vreme;
 
 	public String getKorisnik() {
 		return korisnik;
@@ -30,19 +31,19 @@ public class TwitterPoruka {
 		this.poruka = poruka;
 	}
 
-	public GregorianCalendar getVreme() {
+	public LocalDateTime getVreme() {
 		return vreme;
 	}
 
-	public void setVreme(GregorianCalendar vreme) {
-		if (vreme == null || vreme.after(new GregorianCalendar()))
+	public void setVreme(LocalDateTime vreme) {
+		if (vreme == null || vreme.isAfter(LocalDateTime.now()))
 			throw new RuntimeException("Vreme se mora uneti i mora se odnositi na prosli trenutak");
 
 		this.vreme = vreme;
 	}
 
 	public String toString() {
-		return "KORISNIK:" + korisnik + " VREME:" + vreme.getTime() + " PORUKA:" + poruka;
+		return "KORISNIK:" + korisnik + " VREME:" + vreme + " PORUKA:" + poruka;
 	}
 
 }

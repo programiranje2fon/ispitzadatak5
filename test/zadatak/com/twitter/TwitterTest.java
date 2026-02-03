@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,7 +71,7 @@ public class TwitterTest {
 		for (int i = 0; i < a.size(); i++) {
 			TwitterPoruka prva = a.get(i), druga = b.get(i);
 			if (!prva.getKorisnik().equals(druga.getKorisnik()) || !prva.getPoruka().equals(druga.getPoruka())
-					|| !sdf.format(prva.getVreme().getTime()).equals(sdf.format(druga.getVreme().getTime())))
+					|| !prva.getVreme().equals(druga.getVreme()))
 				return false;
 		}
 		return true;
@@ -93,7 +94,7 @@ public class TwitterTest {
 
 		String korisnik = "Marko";
 		String poruka = "zdravo";
-		GregorianCalendar vreme = new GregorianCalendar();
+		LocalDateTime vreme = LocalDateTime.now();
 		TwitterPoruka twitterPoruka = new TwitterPoruka();
 		twitterPoruka.setKorisnik(korisnik);
 		twitterPoruka.setPoruka(poruka);
@@ -179,25 +180,18 @@ public class TwitterTest {
 	private LinkedList<TwitterPoruka> pomocna(String korisnik) {
 		LinkedList<TwitterPoruka> novePoruke = new LinkedList<TwitterPoruka>();
 		LinkedList<TwitterPoruka> poruke = (LinkedList<TwitterPoruka>) TestUtil.getFieldValue(instance, "poruke");
-		GregorianCalendar trenutniDatum = new GregorianCalendar();
-		int godina = trenutniDatum.get(GregorianCalendar.YEAR);
-		int mesec = trenutniDatum.get(GregorianCalendar.MONTH);
-
-		if (mesec != 0)
-			mesec--;
-		else {
-			mesec = 11;
-			godina--;
-		}
+        LocalDateTime prosliMesec = LocalDateTime.now().minusMonths(1);
+		int godina = prosliMesec.getYear();
+		int mesec = prosliMesec.getMonthValue();
 
 		for (int i = 0; i < poruke.size(); i++)
 			if (poruke.get(i).getKorisnik().equals(korisnik)
-					&& poruke.get(i).getVreme().get(GregorianCalendar.YEAR) == godina
-					&& poruke.get(i).getVreme().get(GregorianCalendar.MONTH) == mesec) {
+					&& poruke.get(i).getVreme().getYear() == godina
+					&& poruke.get(i).getVreme().getMonthValue() == mesec) {
 				TwitterPoruka nova = poruke.get(i);
 
 				for (int j = 0; j < novePoruke.size(); j++)
-					if (nova.getVreme().before(novePoruke.get(i).getVreme())) {
+					if (nova.getVreme().isBefore(novePoruke.get(i).getVreme())) {
 						novePoruke.add(i, nova);
 						break;
 					}

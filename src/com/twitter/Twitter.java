@@ -2,7 +2,7 @@ package com.twitter;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import com.twitter.api.TwitterAPI;
@@ -22,7 +22,7 @@ public class Twitter implements TwitterAPI {
 		TwitterPoruka tp = new TwitterPoruka();
 		tp.setKorisnik(korisnik);
 		tp.setPoruka(poruka);
-		tp.setVreme(new GregorianCalendar());
+		tp.setVreme(LocalDateTime.now());
 		
 		//Poruka se unosi u listu na kraj
 		poruke.addLast(tp);
@@ -63,34 +63,24 @@ public class Twitter implements TwitterAPI {
 	public LinkedList<TwitterPoruka> vratiPoruke(String korisnik) {
 		LinkedList<TwitterPoruka> novePoruke = new LinkedList<TwitterPoruka>();
 		
-		//Utvrdjivanje trenutnog meseca i godine
-		GregorianCalendar trenutniDatum = new GregorianCalendar();
-		int godina = trenutniDatum.get(GregorianCalendar.YEAR);
-		int mesec = trenutniDatum.get(GregorianCalendar.MONTH);
-		
-		//Ako trenutni mesec nije Januar (vrednost 0), trazeni mesec
-		//se dobija oduzimanjem jedinice od meseca. Ako jeste januar,
-		//onda je trazeni mesec decembar (vrednost 11) a godina se
-		//smanjuje za 1.
-		if (mesec!=0) mesec--;
-		else{
-			mesec = 11;
-			godina--;
-		}
+		//Utvrdjivanje meseca i godine koji su bili pre mesec dana
+        LocalDateTime trenutniDatum = LocalDateTime.now().minusMonths(1);
+		int godina = trenutniDatum.getYear();
+		int mesec = trenutniDatum.getMonthValue();
 		
 		//Pretrazivanje liste poruka i pronalazenje poruka od trazenog
 		//korisnika za zeljeni mesec i godinu.
 		for (int i = 0; i < poruke.size(); i++)
 			if (poruke.get(i).getKorisnik().equals(korisnik) &&
-					poruke.get(i).getVreme().get(GregorianCalendar.YEAR)==godina &&
-					poruke.get(i).getVreme().get(GregorianCalendar.MONTH)==mesec){
+					poruke.get(i).getVreme().getYear()==godina &&
+					poruke.get(i).getVreme().getMonthValue()==mesec){
 					TwitterPoruka nova = poruke.get(i);
 					//Svaka takva poruka koja se nadje, se unosi u listu ali tako da poruke budu
 					//poredjane po vremenu poruke. Kad se u novoj listi nadje poruka koja je
 					//poslata kasnije od nove, nova se unosi na njeno mesto a sve ostale se 
 					//pomeraju udesno.
 					for (int j = 0; j < novePoruke.size(); j++)
-						if (nova.getVreme().before(novePoruke.get(i).getVreme())){
+						if (nova.getVreme().isBefore(novePoruke.get(i).getVreme())){
 							novePoruke.add(i, nova);
 							break;
 						}
