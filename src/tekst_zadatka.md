@@ -1,14 +1,15 @@
-#Zadatak 5
+# Zadatak 1
+
 Napraviti javnu klasu **TwitterPoruka** u paketu **com.twitter.poruke** koja ima:
 * Privatni atribut **korisnik** koji predstavlja naziv korisnika koji je objavio poruku.
 * Privatni atribut **poruka** koji predstavlja tekst poruke.
-* Privatni atribut **vreme** koji predstavlja datum i vreme objavljivanja poruke (klasa GregorianCalendar)
+* Privatni atribut **vreme** koji predstavlja datum i vreme objavljivanja poruke (klasa LocalDateTime)
 * Odgovarajuće javne get i set metode za ove atribute. Nedozvoljene vrednosti za atribut korisnik su
 NULL i prazan String, a poruka ne sme biti NULL i može imati najviše 140 znakova. Vreme ne sme da
-bude neki datum u pudućnosti i ne sme da bude NULL. U slučaju unosa ovih nedozvoljenih vrednosti
+bude neki datum u budućnosti i ne sme da bude NULL. U slučaju unosa ovih nedozvoljenih vrednosti
 potrebno je baciti izuzetak sa odgovarajućom porukom.
 * Redefinisanu metodu toString klase Object koja koja vraća jedan String u kome se nalaze svi podaci
-poruke u formatu **“KORISNIK_####_VREME_####_PORUKA_####”**.
+poruke u formatu **“KORISNIK #### VREME #### PORUKA_####”**.
 
 Napraviti javni interfejs **TwitterAPI** u paketu **com.twitter.api** koji ima:
 * Javnu metodu vratiPoruke koja kao ulaz prima naziv korisnika i vraća listu objekata TwitterPoruka.
@@ -32,23 +33,19 @@ objekata klase TwitterPoruka u kojoj se nalaze samo poruke koje je objavio taj k
 prethodnog meseca (u odnosu na trenutni datum). Poruke u listi treba da budu poređane tako da na
 početku budu najstarije poruke pa tek onda novije. __Obratiti pažnju na situaciju kada je trenutno januar mesec__.
 
-#Zadatak 5 - Ispravka koda
+# Zadatak 2 - Ispravka koda
 
-U produžetku teksta je dat kod klase sa metodom koja bi trebalo da, na ekranu, ispisuje strelicu od znakova
-0. Ideja je da strelica bude visine šest redova, širine 5 znakova i okrenuta “na gore”, tako da bi konačan ispis
+U produžetku teksta je dat kod klase sa metodom koja bi trebalo da, 
+na ekranu, ispisuje strelicu od znakova 0. Ideja je da strelica bude
+visine šest redova, širine 5 znakova i okrenuta “na gore”, tako da bi konačan ispis
 na ekranu trebalo da bude:
 
 
 	  0
-	  
-	 000
-	 
-	0 0 0
-	
-	  0
-	  
-	  0
-	  
+	 000	
+	0 0 0	
+	  0	
+	  0	
 	  0
 	  
 Dati kod se kompajlira, ali ne radi to šta treba. Napraviti javnu klasu **IspisivacStrelice** u paketu
@@ -60,18 +57,14 @@ njen rad.
 
 	public class IspisivacStrelice {
 	
-		public static void ispisiStrelicu() {
-		
+		public static void ispisiStrelicu() {	
 			int j = 1;
 			
-			while (j<=28) {
-				
-				if(j%5==5 || j==7 || j==9 || j==11 || j==15)
-					
+			while (j<=28) {	
+				if(j%5==5 || j==7 || j==9 || j==11 || j==15)	
 					System.out.print('0');
 				
-				if(j%5==0)
-					
+				if(j%5==0)	
 					System.out.println();
 				
 				j++;
